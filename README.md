@@ -1,4 +1,4 @@
-<img width="1881" height="1078" alt="image" src="https://github.com/user-attachments/assets/bc3bc6e3-08ca-4296-9537-8607c1848012" /># GatewaySec — Reproducibility Artifact
+# GatewaySec — Reproducibility Artifact
 
 Artifacts for the paper *GatewaySec: Measuring What an Open-Source Inline Gateway Stops and Misses in Web Application Defense* (Nguyen Minh Thien, Duong Quang Tan; FPT University, Can Tho).
 
