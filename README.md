@@ -1,4 +1,4 @@
-# GatewaySec — Reproducibility Artifact
+<img width="1881" height="1078" alt="image" src="https://github.com/user-attachments/assets/bc3bc6e3-08ca-4296-9537-8607c1848012" /># GatewaySec — Reproducibility Artifact
 
 Artifacts for the paper *GatewaySec: Measuring What an Open-Source Inline Gateway Stops and Misses in Web Application Defense* (Nguyen Minh Thien, Duong Quang Tan; FPT University, Can Tho).
 
@@ -35,7 +35,7 @@ Expected: `metrics.json` with XGBoost F1 ≈ 0.9972 on the 565,576-flow test spl
 - The flow classifier does not inspect HTTP bodies and takes no part in payload blocking.
 
 ## Cite
-See `CITATION.cff`. Zenodo DOI: `<DOI-sau-khi-release-Zenodo>`.
+See `CITATION.cff`. Zenodo DOI: `10.5281/zenodo.23140652`.
 
 ## Before publishing
 Run `python scrub.py` (report mode) and resolve every FOUND; review WARN (private IPs, onrender URLs) by hand. Only push when clean.
