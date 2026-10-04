@@ -1,6 +1,6 @@
 # GatewaySec — Reproducibility Artifact
 
-Artifacts for the paper *GatewaySec: Measuring What an Open-Source Inline Gateway Stops and Misses in Web Application Defense* (Nguyen Minh Thien, Duong Quang Tan; FPT University, Can Tho).
+Artifacts for the paper *GatewaySec: Measuring What an Open-Source Inline Gateway Stops and Misses in Web Application Defense*.
 
 > **Scope of reproduction.** The virtual-machine testbed was decommissioned. This archive supports **offline reproduction of the machine-learning results (Table 3)** and **review of the request-path configuration**. It does **not** support live end-to-end replay, which requires rebuilding the testbed. We state this openly rather than imply full replay.
 
