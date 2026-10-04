@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "If you use this artifact, please cite the paper and this archive."
+title: "GatewaySec reproducibility artifact"
+authors:
+  - family-names: Nguyen
+    given-names: Minh Thien
+  - family-names: Duong
+    given-names: Quang Tan
+version: "1.0.0"
+date-released: "2026-10-03"
+license: MIT
+doi: "<DOI-sau-khi-release-Zenodo>"

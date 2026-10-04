@@ -1,0 +1,3 @@
+id,class,http_status,blocked
+SQLI-0001,sqli,403,true
+XSS-0001,xss,200,false

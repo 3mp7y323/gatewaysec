@@ -1,0 +1,16 @@
+[Unit]
+Description=GatewaySec AI Engine (out-of-band, watch flows CSV)
+After=network.target
+
+[Service]
+User=gwuser
+WorkingDirectory=/home/gwuser/ai-engine
+# venv python + serve ở chế độ watch: CSV mới tới -> chấm điểm -> verdict.json
+ExecStart=/home/gwuser/ai-engine/venv/bin/python serve_ai_engine.py --watch /home/gwuser/ai-engine/live_flows.csv
+Restart=always
+RestartSec=5
+StandardOutput=append:/var/log/ai-engine/serve.log
+StandardError=append:/var/log/ai-engine/serve.log
+
+[Install]
+WantedBy=multi-user.target

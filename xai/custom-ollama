@@ -1,0 +1,61 @@
+#!/usr/bin/env python3
+# custom-ollama @ wazuhelk: /var/ossec/integrations/custom-ollama
+# Wazuh integratord goi script nay khi alert level >= nguong (config o ossec.conf).
+# Doc alert -> build prompt tieng Viet -> goi Qwen2.5 @ XAI node -> ghi giai thich
+# nguoc vao Wazuh (qua socket analysisd) de hien Dashboard.
+# XAI out-of-band: chay SAU khi da block, KHONG chan pipeline.
+import sys, json, socket, urllib.request
+
+OLLAMA = "http://192.0.2.88:11434/api/generate"
+MODEL  = "qwen2.5:3b"
+SOCK   = "/var/ossec/queue/sockets/queue"   # socket analysisd de bơm alert moi
+
+def read_alert(path):
+    with open(path) as f:
+        return json.load(f)
+
+def build_prompt(a):
+    rule = a.get("rule", {})
+    data = a.get("data", {})
+    desc = rule.get("description", "")
+    mitre = ",".join(rule.get("mitre", {}).get("id", []) or [])
+    srcip = data.get("src_ip") or data.get("srcip") or a.get("srcip", "?")
+    conf  = data.get("xgb_conf", "?")
+    return (
+        "Bạn là chuyên gia an ninh mạng. Giải thích NGẮN GỌN bằng tiếng Việt "
+        "(tối đa 5 câu) cảnh báo sau cho quản trị viên:\n"
+        f"- Mô tả: {desc}\n- IP nguồn: {srcip}\n- MITRE: {mitre}\n"
+        f"- Độ tin cậy AI: {conf}\n"
+        "Nêu: (1) kẻ tấn công đang làm gì, (2) mức nguy hiểm, (3) khuyến nghị xử lý."
+    )
+
+def ask_ollama(prompt):
+    body = json.dumps({
+        "model": MODEL, "prompt": prompt, "stream": False,
+        "options": {"num_predict": 200, "temperature": 0.3}
+    }).encode()
+    req = urllib.request.Request(OLLAMA, data=body,
+                                 headers={"Content-Type": "application/json"})
+    with urllib.request.urlopen(req, timeout=60) as r:
+        return json.loads(r.read()).get("response", "").strip()
+
+def send_back(srcip, explanation):
+    # bơm 1 event moi vao analysisd -> Wazuh decode -> co the tao alert hien Dashboard
+    msg = json.dumps({"ai_explanation": explanation, "src_ip": srcip,
+                      "integration": "ollama-xai"})
+    event = f"1:ollama-xai:{msg}"
+    s = socket.socket(socket.AF_UNIX, socket.SOCK_DGRAM)
+    s.connect(SOCK); s.send(event.encode()); s.close()
+
+def main():
+    alert = read_alert(sys.argv[1])          # arg1 = file alert (integratord truyen vao)
+    prompt = build_prompt(alert)
+    try:
+        explanation = ask_ollama(prompt)
+    except Exception as e:
+        explanation = f"[LLM loi: {e}]"
+    srcip = alert.get("data", {}).get("src_ip", "?")
+    send_back(srcip, explanation)
+
+if __name__ == "__main__":
+    main()

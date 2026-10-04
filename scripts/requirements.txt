@@ -1,0 +1,10 @@
+requests
+xgboost
+scikit-learn==1.9.0
+joblib
+numpy
+pandas
+matplotlib
+fastapi
+uvicorn[standard]
+pydantic

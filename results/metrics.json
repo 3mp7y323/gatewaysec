@@ -1,0 +1,35 @@
+{
+  "test_size": 565576,
+  "xgboost": {
+    "accuracy": 0.9989,
+    "precision": 0.9967,
+    "recall": 0.9977,
+    "f1": 0.9972,
+    "roc_auc": 0.9999
+  },
+  "iforest": {
+    "accuracy": 0.8235,
+    "precision": 0.6005,
+    "recall": 0.3076,
+    "f1": 0.4068
+  },
+  "ensemble": {
+    "accuracy": 0.9986,
+    "precision": 0.9975,
+    "recall": 0.9951,
+    "f1": 0.9963,
+    "roc_auc": 0.9998
+  },
+  "confusion_matrix_xgb": [
+    [
+      453897,
+      368
+    ],
+    [
+      251,
+      111060
+    ]
+  ],
+  "auto_block_count": 110311,
+  "block_threshold": 0.9
+}

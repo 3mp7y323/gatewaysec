@@ -1,0 +1,44 @@
+{
+  "T1046": {
+    "ten": "Network Service Discovery (Quét dịch vụ mạng)",
+    "mo_ta": "Kẻ tấn công quét các cổng và dịch vụ đang mở trên hệ thống để lập bản đồ mục tiêu, tìm điểm yếu trước khi khai thác. Đây là giai đoạn TRINH SÁT (Discovery), thường dùng nmap/masscan.",
+    "nguy_hiem": "Trung bình. Chưa gây hại trực tiếp nhưng là bước chuẩn bị cho tấn công sâu hơn (khai thác lỗ hổng dịch vụ lộ ra).",
+    "xu_ly": "Chặn IP nguồn (đã tự động chặn). Kiểm tra cổng nào bị quét, đảm bảo chỉ mở cổng cần thiết. Rà soát log xem có khai thác tiếp theo không."
+  },
+  "T1190": {
+    "ten": "Exploit Public-Facing Application (Khai thác ứng dụng công khai)",
+    "mo_ta": "Kẻ tấn công khai thác lỗ hổng trên ứng dụng/dịch vụ lộ ra Internet (web server, API) để xâm nhập, thường qua SQLi, RCE, deserialization.",
+    "nguy_hiem": "CAO. Có thể dẫn tới chiếm quyền máy chủ, rò rỉ dữ liệu.",
+    "xu_ly": "Chặn IP ngay. Kiểm tra WAF log xem payload gì. Vá lỗ hổng ứng dụng. Rà soát dấu hiệu xâm nhập (webshell, tài khoản lạ)."
+  },
+  "T1110": {
+    "ten": "Brute Force (Dò mật khẩu vét cạn)",
+    "mo_ta": "Kẻ tấn công thử nhiều tổ hợp mật khẩu/tài khoản liên tục để chiếm tài khoản (SSH, web login, RDP). Tạo pattern nhiều kết nối dồn dập cùng nguồn.",
+    "nguy_hiem": "CAO nếu mật khẩu yếu. Có thể chiếm tài khoản hợp lệ.",
+    "xu_ly": "Chặn IP nguồn. Bật rate-limit/khóa tài khoản tạm. Ép mật khẩu mạnh + MFA. Kiểm tài khoản nào bị nhắm."
+  },
+  "T1059": {
+    "ten": "Command and Scripting Interpreter (Thực thi lệnh/script)",
+    "mo_ta": "Kẻ tấn công chèn và chạy lệnh hệ thống hoặc script độc hại (qua injection, XSS, RCE) để điều khiển máy nạn nhân.",
+    "nguy_hiem": "CAO. Thực thi mã tùy ý trên máy chủ.",
+    "xu_ly": "Chặn IP. Cô lập máy nghi nhiễm. Kiểm process/cron/script lạ. Rà soát WAF/app log tìm payload injection."
+  },
+  "T1595": {
+    "ten": "Active Scanning (Quét chủ động)",
+    "mo_ta": "Kẻ tấn công chủ động dò quét hạ tầng nạn nhân (quét cổng, quét lỗ hổng) trước khi tấn công. Giai đoạn trinh sát ban đầu.",
+    "nguy_hiem": "Thấp-Trung bình. Trinh sát, chưa khai thác.",
+    "xu_ly": "Chặn IP quét. Giảm bề mặt lộ (đóng cổng thừa). Theo dõi IP này có quay lại khai thác không."
+  },
+  "T1498": {
+    "ten": "Network Denial of Service (Tấn công từ chối dịch vụ)",
+    "mo_ta": "Kẻ tấn công làm nghẽn băng thông/tài nguyên mạng bằng lượng lớn lưu lượng, khiến dịch vụ ngừng phục vụ người dùng hợp lệ.",
+    "nguy_hiem": "CAO. Gián đoạn dịch vụ.",
+    "xu_ly": "Chặn IP nguồn. Bật rate-limit. Nếu phân tán (DDoS) cần lọc thượng nguồn/CDN. Theo dõi tài nguyên máy chủ."
+  },
+  "DEFAULT": {
+    "ten": "Hoạt động độc hại (chưa phân loại MITRE cụ thể)",
+    "mo_ta": "AI Engine phát hiện luồng mạng bất thường khớp mẫu tấn công đã học từ dữ liệu huấn luyện, nhưng chưa gắn kỹ thuật MITRE cụ thể.",
+    "nguy_hiem": "Cần đánh giá theo độ tin cậy AI và ngữ cảnh.",
+    "xu_ly": "Chặn IP (đã tự động). Điều tra thủ công luồng này: nguồn, đích, cổng, tần suất. Xác nhận có phải dương tính thật."
+  }
+}
