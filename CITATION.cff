@@ -1,12 +1,11 @@
 cff-version: 1.2.0
-message: "If you use this artifact, please cite the paper and this archive."
+message: "If you use this artifact, please cite the associated paper and this archive."
 title: "GatewaySec reproducibility artifact"
+# NOTE (double-blind review): author names removed for review.
+# Restore the two real authors + affiliation on acceptance, then publish v1.1.
 authors:
-  - family-names: Nguyen
-    given-names: Minh Thien
-  - family-names: Duong
-    given-names: Quang Tan
+  - name: "Anonymous (double-blind review)"
 version: "1.0.0"
-date-released: "2026-10-03"
+date-released: "2026-10-04"
 license: MIT
 doi: "10.5281/zenodo.23140652"
